@@ -1,0 +1,19 @@
+{
+  "name": "webloadtesting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "load":"artillery run my-artillery.yml",
+    "generateJson":"artillery run my-artillery.yml --output results.json",
+    "report":"artillery run my-artillery.yml --output results.json && artillery report results.json",
+    "dashboard":"artillery run my-artillery.yml --record --key a9_FGcPQzaiFuRPEROfYLtw5hZZTN5X_2nF"
+  },
+  "author": "Auntor Acharja",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.12.12",
+    "artillery": "^2.0.13"
+  }
+}

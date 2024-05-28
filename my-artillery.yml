@@ -1,0 +1,28 @@
+config:
+  target: https://playwright.dev/
+  engines:
+    playwright:
+      launchOptions:
+        headless: true
+  processor: "./tests/artillery/loadTest.ts"
+  phases:
+  # Inject one user each sec for 10 seconds
+    # - name: constantArrival
+    #   duration: 10
+    #   arrivalRate: 1
+    # # Pause between two phases
+    # - name: Pause
+    #   pause: 12
+    # # Ramp UP: from arrivalRate to RampTo count, gradually increase each second
+    # - name: rampTo
+    #   duration: 10
+    #   arrivalRate: 1
+    #   rampTo: 15
+    # Fixed Arrival: For a duration a fixed user will hit, let's in 10 second only 15 user will hit
+    - name: Fixed Arrival
+      duration: 10
+      arrivalCount: 15
+scenarios:
+  - name: Smoke Load Test
+    engine: playwright
+    testFunction: "artilleryScript"
