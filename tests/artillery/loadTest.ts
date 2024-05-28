@@ -1,12 +1,14 @@
 import { Page } from "@playwright/test";
-import { accessGetStarted,verifyTitle } from "../commands/access";
-export async function artilleryScript(page:Page,vuContext,events,test) {
+import { loginToTheApplication,logoutFromApplication } from "../commands/login";
+import loginData from "../data/loginData.json"
 
-    await test.step("Get Started Step",async()=>{
-        await accessGetStarted(page)
+export async function LoginAndLogoutScript(page:Page,vuContext,events,test) {
+
+    await test.step("Login To The Application",async()=>{
+        await loginToTheApplication(page,loginData.user,loginData.pass)
     })
-    await test.step("Title verification Step",async()=>{
-        await verifyTitle(page)
+    await test.step("Logout From The Application",async()=>{
+        await logoutFromApplication(page)
     })
     
 }

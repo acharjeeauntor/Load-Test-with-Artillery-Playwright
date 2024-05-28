@@ -1,0 +1,30 @@
+config:
+  target: 'http://app01.local.dev'
+  phases:
+    - duration: 300
+      arrivalRate: 25
+ 
+before:
+  flow:
+    - log: 'Get auth token'
+    - post:
+        url: '/auth'
+        json:
+          username: 'myUsername'
+          password: 'myPassword'
+        capture:
+          - json: $.id_token
+            as: token
+scenarios:
+  - flow:
+      - get:
+          url: '/data'
+          headers:
+            authorization: 'Bearer {{ token }}'
+after:
+  flow:
+    - log: 'Invalidate token'
+    - post:
+        url: '/logout'
+        json:
+          token: '{{ token }}'

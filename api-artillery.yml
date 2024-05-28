@@ -1,0 +1,35 @@
+config:
+  target: 'https://simple-books-api.glitch.me'
+  phases:
+    - name: constantArrival
+      duration: 10
+      arrivalRate: 1
+
+scenarios:
+  - flow:
+      # - get:
+      #     url: '/books?type=fiction&limit=2'
+      # - get:
+      #     url: '/books/2'
+      - post:
+          url: '/orders'
+          headers:
+            authorization: 'Bearer be17c38da6d004328262c6f3456b7ea2ec2991b6eb673d9088eb9961b97fa0d3'
+          json:
+            bookId: '4'
+            customerName: 'auntor'
+          capture:
+            json: $.orderId
+            as: orderID
+      # - get:
+      #     url: '/orders/{{ orderID }}'  # Use the captured orderId here
+      # - patch:
+      #     url: '/orders/{{ orderID }}'  # Use the captured orderId here
+      #     headers:
+      #       authorization: 'Bearer be17c38da6d004328262c6f3456b7ea2ec2991b6eb673d9088eb9961b97fa0d3'
+      #     json:
+      #       customerName: 'ONTU'
+      - delete:
+          url: '/orders/{{ orderID }}'  # Use the captured orderId here
+          headers:
+            authorization: 'Bearer be17c38da6d004328262c6f3456b7ea2ec2991b6eb673d9088eb9961b97fa0d3'
